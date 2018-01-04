@@ -75,7 +75,7 @@ export default class Renderer {
     // Add shaders
     this.RGBShaderPass = new ShaderPass(RGBShiftShader)
     this.composer.addPass(this.RGBShaderPass)
-    this.RGBShaderPass.uniforms['amount'].value = 0.02
+    this.RGBShaderPass.uniforms['amount'].value = 0.01
 
     this.KaleidoShaderPass = new ShaderPass(KaleidoShader)
     this.composer.addPass(this.KaleidoShaderPass)

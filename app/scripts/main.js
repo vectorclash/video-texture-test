@@ -9,6 +9,7 @@ import VideoMesh from './components/VideoMesh'
 let renderer
 let scene, camera
 let shapeContainer
+let videoNum = 0
 
 let videos = [
   '../videos/abstract.mp4',
@@ -29,33 +30,17 @@ function init() {
 
   for(let i = 0; i < 6; i++) {
     let ranVideo = videos[Math.floor(Math.random() * videos.length)]
+    let iterateVideo = videos[videoNum]
+
     if(i > 0) {
-      let videoShape = new VideoMesh(ranVideo)
-      var ranScale = 0.2 + Math.random() * 1
-      var ranX1 = -50 + Math.random() * 100
-      var ranY1 = -50 + Math.random() * 100
-      var ranZ1 = -50 + Math.random() * 100
-
-      var ranX2 = -50 + Math.random() * 100
-      var ranY2 = -50 + Math.random() * 100
-      var ranZ2 = -50 + Math.random() * 100
-
-      videoShape.mesh.scale.set(ranScale, ranScale, ranScale)
-      videoShape.mesh.position.set(ranX1, ranY1, ranZ1)
-
-      TweenMax.to(videoShape.mesh.position, 5 + Math.random() * 5, {
-          x: ranX2,
-          y: ranY2,
-          z: ranZ2,
-          ease: Back.easeInOut,
-          yoyoEase: Back.easeInOut,
-          repeat: -1
-        }
-      )
-
+      let videoShape = new VideoMesh(iterateVideo, true)
       shapeContainer.add(videoShape.mesh)
+      videoNum++
+      if(videoNum >= videos.length) {
+        videoNum = 0
+      }
     } else {
-      let videoShape = new VideoMesh(ranVideo, THREE.BackSide)
+      let videoShape = new VideoMesh(ranVideo, false, THREE.BackSide)
       videoShape.mesh.scale.set(150, 150, 150)
       shapeContainer.add(videoShape.mesh)
     }
